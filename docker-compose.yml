@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: docmind_postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - docmind_network
+
+  grobid:
+    image: lfoppiano/grobid:0.8.0
+    container_name: docmind_grobid
+    ports:
+      - "${GROBID_PORT}:8070"  # Grobid listens on 8070 internally
+    environment:
+      GROBID_MAXCONNECTIONS: 10
+      JAVA_OPTS: "-Xms512m -Xmx2g"
+    networks:
+      - docmind_network
+    restart: unless-stopped
+
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: chromadb
+    ports:
+      - "8000:8000"
+    environment:
+      IS_PERSISTENT: "TRUE"
+      PERSIST_DIRECTORY: /chroma/chroma-db
+    volumes:
+      - ./vector_store:/chroma/chroma-db
+    networks:
+      - docmind_network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+
+networks:
+  docmind_network:
+    driver: bridge
