@@ -32,5 +32,15 @@ An interactive, AI-powered application that allows users to upload research pape
 | Version Control         | Github                                    |
 | Developmnent Tools      | VsCode, Github, Copilot, Docker           |
 
+## 🤝 Contributing
+Pull requests are welcome. Please open issues first to discuss changes.
 
+## 📚 Example Use Case
+Upload a 20-page research paper, and within seconds:
 
+Get structured metadata
+
+View a clear summary
+
+Ask detailed follow-up questions like:
+“What methodology was used in section 3?”
