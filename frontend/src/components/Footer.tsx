@@ -22,7 +22,7 @@ const Footer = () => {
           
           <div className="flex justify-center space-x-4 mb-4">
             <a
-              href="https://github.com/your-repo"
+              href="https://github.com/arhaanarif/DocMind"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center space-x-2 text-white/90 hover:text-white transition-colors"
@@ -34,7 +34,7 @@ const Footer = () => {
           </div>
           
           <p className="text-white/80 text-sm">
-            © 2024 DocMind-AI. Built with ❤️ for researchers.
+            © 2025 DocMind-AI. Built by Arhaan Arif.
           </p>
         </div>
       </div>
